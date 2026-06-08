@@ -6,13 +6,13 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dataDir = path.join(__dirname, "..", "data");
+const dataDir = process.env.DATA_DIR || path.join(__dirname, "..", "data");
 
 if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-const dbPath = path.join(dataDir, "negados.sqlite");
+const dbPath = process.env.DB_PATH || path.join(dataDir, "negados.sqlite");
 
 export const db = new Database(dbPath);
 
